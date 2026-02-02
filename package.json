@@ -41,7 +41,7 @@
     "winget": "node ./scripts/auto-winget.js"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.965.0",
+    "@aws-sdk/client-s3": "3.981.0",
     "@aws-sdk/lib-storage": "^3.965.0",
     "@aws-sdk/s3-request-presigner": "^3.965.0",
     "@nodelib/fs.walk": "^3.0.1",
