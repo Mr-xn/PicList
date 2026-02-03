@@ -112,6 +112,8 @@ const mimeToExt = {
 
 ### 方案二：临时本地补丁
 
+**注意**：这个方法比较复杂，因为需要修改编译后的 JavaScript 代码。**推荐使用方案一**。
+
 如果需要立即使用，可以：
 
 1. 安装 patch-package：
@@ -128,15 +130,9 @@ const mimeToExt = {
    }
    ```
 
-3. 运行 `yarn install` 后，手动修改：
-   ```
-   node_modules/piclist/dist/utils/common.js
-   ```
+3. 修改 PicList-Core 源代码并重新构建，或等待官方修复
 
-4. 生成补丁：
-   ```bash
-   npx patch-package piclist
-   ```
+**说明**：`common.ts.fixed` 是 TypeScript 源码，需要编译为 JavaScript 后才能应用到 `node_modules/piclist/dist/utils/common.js`。直接修改编译后的 JS 文件较为困难，建议等待官方更新。
 
 ## 测试验证
 
