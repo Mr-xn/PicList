@@ -184,7 +184,12 @@ export const getFSFile = async (filePath: string): Promise<IPathTransformedImgIn
 }
 
 /**
- * Map Content-Type to file extension
+ * Map Content-Type header to file extension
+ * @param contentType - The Content-Type header value (e.g., 'image/jpeg; charset=utf-8')
+ * @returns File extension with leading dot (e.g., '.jpg'), or empty string if unknown
+ * 
+ * Supported MIME types: jpeg, jpg, png, gif, webp, bmp, svg, ico, avif, heic, heif
+ * Used as fallback when URL pathname doesn't contain a file extension
  */
 const getExtensionFromContentType = (contentType: string): string => {
   const mimeToExt: Record<string, string> = {
@@ -213,6 +218,9 @@ export const getURLFile = async (url: string, ctx: IPicGo): Promise<IPathTransfo
     ;(async () => {
       try {
         // Capture full response to access Content-Type header for extension detection
+        // resolveWithFullResponse: true returns complete response object with headers,
+        // instead of just the response body. This allows us to check Content-Type
+        // when URL doesn't have a file extension (e.g., Feishu/Lark image URLs).
         const resp = await ctx
           .request({
             method: 'get',
