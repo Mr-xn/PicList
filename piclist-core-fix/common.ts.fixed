@@ -212,6 +212,7 @@ export const getURLFile = async (url: string, ctx: IPicGo): Promise<IPathTransfo
   const requestFn = new Promise<IPathTransformedImgInfo>((resolve, reject) => {
     ;(async () => {
       try {
+        // Capture full response to access Content-Type header for extension detection
         const resp = await ctx
           .request({
             method: 'get',
@@ -230,7 +231,7 @@ export const getURLFile = async (url: string, ctx: IPicGo): Promise<IPathTransfo
         } catch (_e) {
           extname = path.extname(urlPath) || ''
         }
-        // If no extension found from URL, try to get it from Content-Type header
+        // Fallback: When URL has no extension (e.g., Feishu/Lark URLs), detect type from Content-Type header
         if (!extname && headers['content-type']) {
           extname = getExtensionFromContentType(headers['content-type'])
         }

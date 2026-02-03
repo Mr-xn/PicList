@@ -41,7 +41,10 @@ If you need the fix immediately before it's merged into PicList-Core:
    }
    ```
 
-3. After `yarn install`, manually apply changes to `node_modules/piclist/dist/utils/common.js`
+3. After `yarn install`, manually apply the changes from `common.ts.fixed`:
+   - Copy the `getExtensionFromContentType()` function (lines 186-207)
+   - Replace the `getURLFile()` function with the updated version (lines 209-265)
+   - Target file: `node_modules/piclist/dist/utils/common.js`
 
 4. Create patch:
    ```bash
